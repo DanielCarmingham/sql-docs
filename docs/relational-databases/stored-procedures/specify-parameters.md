@@ -93,7 +93,7 @@ IF OBJECT_ID('Sales.uspGetSalesYTD', 'P') IS NOT NULL
     DROP PROCEDURE Sales.uspGetSalesYTD;  
 GO  
 CREATE PROCEDURE Sales.uspGetSalesYTD  
-@SalesPerson nvarchar(50) = NULL  -- NULL default value  
+    @SalesPerson nvarchar(50) = NULL  -- NULL default value  
 AS   
     SET NOCOUNT ON;   
   
@@ -137,13 +137,13 @@ GO
 ```  
 USE AdventureWorks2012;  
 GO  
-IF OBJECT_ID ( 'Production.uspGetList', 'P' ) IS NOT NULL   
+IF OBJECT_ID ('Production.uspGetList', 'P') IS NOT NULL   
     DROP PROCEDURE Production.uspGetList;  
 GO  
-CREATE PROCEDURE Production.uspGetList @Product varchar(40)   
-    , @MaxPrice money   
-    , @ComparePrice money OUTPUT  
-    , @ListPrice money OUT  
+CREATE PROCEDURE Production.uspGetList @Product varchar(40),
+    @MaxPrice money,
+    @ComparePrice money OUTPUT,
+    @ListPrice money OUT  
 AS  
     SET NOCOUNT ON;  
     SELECT p.[Name] AS Product, p.ListPrice AS 'List Price'  
@@ -154,7 +154,7 @@ AS
 -- Populate the output variable @ListPprice.  
 SET @ListPrice = (SELECT MAX(p.ListPrice)  
         FROM Production.Product AS p  
-        JOIN  Production.ProductSubcategory AS s   
+        JOIN Production.ProductSubcategory AS s   
           ON p.ProductSubcategoryID = s.ProductSubcategoryID  
         WHERE s.[Name] LIKE @Product AND p.ListPrice < @MaxPrice);  
 -- Populate the output variable @compareprice.  
